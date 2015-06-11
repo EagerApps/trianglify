@@ -1,0 +1,92 @@
+{
+  "resources": {
+    "body": [
+      {
+        "type": "script",
+        "src": "./dist/trianglify.min.js"
+      },
+      {
+        "type": "script",
+        "src": "./install/helper.js"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "regions": {
+        "title": "Areas to Trianglify",
+        "order": 1,
+        "type": "array",
+        "items": {
+          "title": "Area",
+          "type": "object",
+          "properties": {
+            "location": {
+              "title": "Location",
+              "description": "What element on the page should be trianglified?",
+              "type": "string",
+              "format": "selector",
+              "order": 1
+            },
+            "colors": {
+              "title": "Color Set",
+              "type": "string",
+              "order": 2,
+              "enum": ["YlGn", "YlGnBu", "GnBu", "BuGn", "PuBuGn", "PuBu", "BuPu", "RdPu", "PuRd", "OrRd", "YlOrRd", "YlOrBr", "Purples", "Blues", "Greens", "Oranges", "Reds", "Greys", "PuOr", "BrBG", "PRGn", "PiYG", "RdBu", "RdGy", "RdYlBu", "Spectral", "RdYlGn", "Accent", "Dark2", "Paired", "Pastel1", "Pastel2", "Set1", "random"],
+              "enumNames": [
+                "Yellow-Green",
+                "Yellow-Green-Blue",
+                "Green-Blue",
+                "Blue-Green",
+                "Purple-Blue-Green",
+                "Purple-Blue",
+                "Blue-Purple",
+                "Red-Purple",
+                "Purple-Red",
+                "Orange-Red",
+                "Yellow-Orange-Red",
+                "Yellow-Orange-Blue",
+                "Purples",
+                "Blues",
+                "Greens",
+                "Oranges",
+                "Reds",
+                "Greys",
+                "Purple-Orange",
+                "Brown-Green",
+                "Purple-Green",
+                "Pink-Green",
+                "Red-Blue",
+                "Red-Grey",
+                "Red-Yellow-Blue",
+                "Spectral",
+                "Red-Yellow-Green",
+                "Accent",
+                "Dark",
+                "Paired",
+                "Pastel 1",
+                "Pastel 2",
+                "Bold",
+                "Random"
+              ]
+            },
+            "size": {
+              "title": "Cell Size",
+              "description": "Smaller numbers create more dense patterns",
+              "type": "number",
+              "default": 75
+            },
+            "variance": {
+              "title": "Variance",
+              "description": "Smaller numbers create more geometric patterns",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.75
+            }
+          }
+        }
+      }
+    }
+  }
+}
