@@ -5,7 +5,7 @@
 
   var options = INSTALL_OPTIONS;
 
-  for (var i=0; i < options.regions; i++){
+  for (var i=0; i < options.regions.length; i++){
     var reg = options.regions[i];
 
     var els = document.querySelectorAll(reg.location);
@@ -22,7 +22,8 @@
         variance: options.variance / 100
       });
 
-      els[j].style.background = "url(" + tri.png() + ")"
+      els[j].style.background = "url(" + tri.png() + ") no-repeat"
+      els[j].style.backgroundSize = 'contain'
     }
   }
 
