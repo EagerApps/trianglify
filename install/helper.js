@@ -23,7 +23,7 @@
       });
 
       els[j].style.background = "url(" + tri.png() + ") no-repeat"
-      els[j].style.backgroundSize = 'contain'
+      els[j].style.backgroundSize = 'cover'
     }
   }
 
