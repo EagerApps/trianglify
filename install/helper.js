@@ -16,13 +16,13 @@
 
       var tri = window.Trianglify({
         width: size.width,
-        heigth: size.height,
+        height: size.height,
         cell_size: options.size,
         x_colors: options.colors,
-        variance: options.variance
+        variance: options.variance / 100
       });
 
-      els[j].style.background = "url(" + tri.png() + ") 0 0 auto auto no-repeat"
+      els[j].style.background = "url(" + tri.png() + ")"
     }
   }
 

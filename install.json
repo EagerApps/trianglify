@@ -32,6 +32,7 @@
               "title": "Color Set",
               "type": "string",
               "order": 2,
+              "default": "YlGn",
               "enum": ["YlGn", "YlGnBu", "GnBu", "BuGn", "PuBuGn", "PuBu", "BuPu", "RdPu", "PuRd", "OrRd", "YlOrRd", "YlOrBr", "Purples", "Blues", "Greens", "Oranges", "Reds", "Greys", "PuOr", "BrBG", "PRGn", "PiYG", "RdBu", "RdGy", "RdYlBu", "Spectral", "RdYlGn", "Accent", "Dark2", "Paired", "Pastel1", "Pastel2", "Set1", "random"],
               "enumNames": {
                 "YlGn": "Yellow-Green",
@@ -74,15 +75,17 @@
               "title": "Cell Size",
               "description": "Smaller numbers create more dense patterns",
               "type": "number",
-              "default": 75
+              "default": 75,
+              "order": 3
             },
             "variance": {
               "title": "Variance",
               "description": "Smaller numbers create more geometric patterns",
               "type": "number",
               "minimum": 0,
-              "maximum": 1,
-              "default": 0.75
+              "maximum": 100,
+              "default": 75,
+              "order": 4
             }
           }
         }
