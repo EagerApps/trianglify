@@ -17,9 +17,9 @@
       var tri = window.Trianglify({
         width: size.width,
         height: size.height,
-        cell_size: options.size,
-        x_colors: options.colors,
-        variance: options.variance / 100
+        cell_size: reg.size,
+        x_colors: reg.colors,
+        variance: reg.variance / 100
       });
 
       els[j].style.background = "url(" + tri.png() + ") no-repeat"
