@@ -12,7 +12,7 @@
     if (!els) continue;
 
     for (var j=0; j < els.length; j++){
-      size = els[j].getBoundingClientRect();
+      var size = els[j].getBoundingClientRect();
 
       var tri = window.Trianglify({
         width: size.width,
