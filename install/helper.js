@@ -6,14 +6,16 @@
   var options = INSTALL_OPTIONS;
   var pendingRegions = options.regions;
 
+  var styleCont = '';
+  for (var i=0; i < pendingRegions.length; i++){
+    styleCont += pendingRegions[i].location + " { opacity: 0; }\n"
+  }
+
+  var style = document.createElement('style');
+  style.innerHTML = styleCont;
+  document.head.appendChild(style);
+
   var trianglify = function(el, reg){
-    // It takes a non-trivial amount of time to generate the triangles, so we hide the element to prevent a flash
-    var origOpacity = el.style.opacity;
-    el.style.opacity = 0;
-
-    // Force paint
-    el.offsetHeight;
-
     // We need default sizes because with MutationObserver we could easily be running before this element
     // attains it's full size.  We could rerender as it's children are populated, but that causes the rendering
     // to change as the page loads.
@@ -28,7 +30,8 @@
     el.style.background = "url(" + tri.png() + ") no-repeat"
     el.style.backgroundSize = 'cover'
 
-    el.style.opacity = origOpacity;
+    // It takes a non-trivial amount of time to generate the triangles, so we hide the element to prevent a flash
+    el.style.opacity = '1';
   }
 
   var checkNode = function(node){
