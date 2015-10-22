@@ -11,6 +11,9 @@
     var origOpacity = el.style.opacity;
     el.style.opacity = 0;
 
+    // Force paint
+    el.offsetHeight;
+
     // We need default sizes because with MutationObserver we could easily be running before this element
     // attains it's full size.  We could rerender as it's children are populated, but that causes the rendering
     // to change as the page loads.
