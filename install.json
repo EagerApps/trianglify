@@ -1,6 +1,6 @@
 {
   "resources": {
-    "body": [
+    "head": [
       {
         "type": "script",
         "src": "./dist/trianglify.min.js"
