@@ -7,14 +7,16 @@
   var pendingRegions = options.regions;
 
   var trianglify = function(el, reg){
-    var size = el.getBoundingClientRect();
+    // It takes a non-trivial amount of time to generate the triangles, so we hide the element to prevent a flash
+    var origOpacity = el.style.opacity;
+    el.style.opacity = 0;
 
     // We need default sizes because with MutationObserver we could easily be running before this element
     // attains it's full size.  We could rerender as it's children are populated, but that causes the rendering
     // to change as the page loads.
     var tri = window.Trianglify({
-      width: Math.max(size.width, 3000),
-      height: Math.max(size.height, 3000),
+      width: 3000,
+      height: 3000,
       cell_size: reg.size,
       x_colors: reg.colors,
       variance: reg.variance / 100
@@ -22,6 +24,8 @@
 
     el.style.background = "url(" + tri.png() + ") no-repeat"
     el.style.backgroundSize = 'cover'
+
+    el.style.opacity = origOpacity;
   }
 
   var checkNode = function(node){
