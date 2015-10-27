@@ -5,6 +5,7 @@
 
   var options = INSTALL_OPTIONS;
   var pendingRegions = options.regions;
+  var prevRegions = [];
 
   var styleCont = '';
   for (var i=0; i < pendingRegions.length; i++){
@@ -19,16 +20,26 @@
     // We need default sizes because with MutationObserver we could easily be running before this element
     // attains it's full size.  We could rerender as it's children are populated, but that causes the rendering
     // to change as the page loads.
+
+    if (reg.size < 20)
+      reg.size = 20;
+
     var tri = window.Trianglify({
-      width: 3000,
-      height: 3000,
+      width: 1000,
+      height: 1000,
       cell_size: reg.size,
       x_colors: reg.colors,
       variance: reg.variance / 100
     });
 
-    el.style.background = "url(" + tri.png() + ") no-repeat"
-    el.style.backgroundSize = 'cover'
+    var svg = tri.svg();
+
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+    prevRegions.push([el, el.style.background, el.style.backgroundSize]);
+
+    el.style.background = "url('data:image/svg+xml;utf8," + svg.outerHTML + "') no-repeat";
+    el.style.backgroundSize = 'cover';
 
     // It takes a non-trivial amount of time to generate the triangles, so we hide the element to prevent a flash
     el.style.opacity = '1';
@@ -48,10 +59,24 @@
       }
     }
     return false;
-  }
+  };
 
+  var load = function(){
+    for (var i=0; i < pendingRegions.length; i++){
+      var reg = pendingRegions[i];
+
+      var els = document.querySelectorAll(reg.location);
+      if (!els) continue;
+
+      for (var j=0; j < els.length; j++){
+        trianglify(els[i], reg);
+      }
+    }
+  };
+
+  var observer;
   if (window.MutationObserver != null) {
-    var observer = new MutationObserver(function(mutations) {
+    observer = new MutationObserver(function(mutations) {
       for (var i=0; i < mutations.length; i++){
         var addedNodes = mutations[i].addedNodes;
         for (var j=0; j < addedNodes.length; j++){
@@ -70,21 +95,7 @@
       childList: true,
       subtree: true
     });
-
   } else {
-    var load = function(){
-      for (var i=0; i < pendingRegions.length; i++){
-        var reg = pendingRegions[i];
-
-        var els = document.querySelectorAll(reg.location);
-        if (!els) continue;
-
-        for (var j=0; j < els.length; j++){
-          trianglify(els[i], reg);
-        }
-      }
-    }
-
     if (document.readyState == 'complete'){
       load();
     } else {
@@ -92,4 +103,25 @@
     }
   }
 
+  var setOptions = function(opts){
+    options = opts;
+
+    pendingRegions = options.regions;
+
+    if (observer){
+      observer.disconnect();
+    }
+
+    for (var i=0; i < prevRegions.length; i++){
+      prevRegions[i][0].style.background = prevRegions[i][1];
+      prevRegions[i][0].style.backgroundSize = prevRegions[i][2];
+    }
+    prevRegions = [];
+
+    load();
+  }
+
+  window.EagerTrianglifyApp = {
+    setOptions: setOptions
+  };
 })()
