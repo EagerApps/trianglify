@@ -83,7 +83,7 @@
               "title": "Cell Size",
               "description": "Smaller numbers create more dense patterns",
               "type": "number",
-              "default": 180,
+              "default": 35,
               "order": 3
             },
             "variance": {
